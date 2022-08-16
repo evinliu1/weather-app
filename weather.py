@@ -7,7 +7,7 @@ user_api = '046ac129c5890d452342dc29c3983bf4'
 # layout of my application
 layout = [
     [sg.Text('Welcome to the Weather Application')],
-    [sg.Input('CITY NAME HERE',key = '-INPUT_FIELD-'),sg.Button('Go', key='-SEARCH_CITY-'), sg.Button('Exit',key='-CLOSE_BUTTON-')],
+    [sg.Input('Seoul',key = '-INPUT_FIELD-'),sg.Button('Go', key='-SEARCH_CITY-'), sg.Button('Exit',key='-CLOSE_BUTTON-')],
     [sg.Text('Display:')],
     [sg.Text('', key='-DATA_FIELD-')]
 ]
@@ -15,7 +15,6 @@ layout = [
 # create the window and attach layout to it
 window = sg.Window('Weather App',
             layout,
-            no_titlebar= True,
             grab_anywhere = True,
             keep_on_top = True)
 
@@ -23,6 +22,10 @@ while True:
 
     # window is keeping track of events and value fields
     event, values = window.read()
+
+    # if user presses exit button
+    if event == '-CLOSE_BUTTON-':
+        break
 
     # if user presses 'go' button
     if event == '-SEARCH_CITY-':
@@ -50,8 +53,5 @@ while True:
             Wind Speed: ''' + str(wind_speed) + '\n'
 
             window['-DATA_FIELD-'].update(update)
-    
-    # if user presses exit button
-    if event == '-CLOSE_BUTTON-':
-        break
+
 window.close()
